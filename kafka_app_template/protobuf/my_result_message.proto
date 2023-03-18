@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+message MyResultMessage {
+  string reqId = 1;
+  string userId = 2;
+  string resultMessage = 3;
+  int64 createdAt = 4;
+}

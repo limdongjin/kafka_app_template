@@ -1,0 +1,42 @@
+bootstrap_servers: ${oc.env:BOOTSTRAPSERVERS}
+sasl_mechanism: ${oc.env:KAFKA_SASL_MECHANISM}
+security_protocol: ${oc.env:KAFKA_SECURITY_PROTOCOL}
+sasl_username: ${oc.env:KAFKA_USER_NAME}
+sasl_password: ${oc.env:KAFKA_USER_PASSWORD}
+
+consumer_group_id: "my-group"
+consumer_topic_name: "request.foo"
+producer_topic_name: "result.foo"
+
+consumer:
+  bootstrap:
+    servers: ${...bootstrap_servers}
+  sasl:
+    mechanism: ${...sasl_mechanism}
+    username: ${...sasl_username}
+    password: ${...sasl_password}
+  security:
+    protocol: ${...security_protocol}
+  group:
+    id: ${...consumer_group_id} 
+  auto:
+    offset:
+      reset: "earliest"
+  enable:
+    auto:
+      commit: False
+  max:
+    poll:
+      interval:
+        ms: 300000 # 5min. (default: 300000)
+
+producer:
+  bootstrap:
+    servers: ${...bootstrap_servers}
+  sasl:
+    mechanism: ${...sasl_mechanism}
+    username: ${...sasl_username}
+    password: ${...sasl_password}
+  security:
+    protocol: ${...security_protocol}
+ 
